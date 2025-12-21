@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Word {
+  id String @id @unique
+  context String @unique
+  type Type @default(noun)
+  description String 
+
+}
+
+enum Type {
+  noun
+  verb
+  adjective
+}
