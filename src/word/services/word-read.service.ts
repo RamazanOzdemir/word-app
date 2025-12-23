@@ -1,15 +1,15 @@
-import { Injectable } from '@nestjs/common';
-import { PaginationList } from 'src/app.dto';
+import { Inject, Injectable } from '@nestjs/common';
 import { type WordRepository } from '../domain/repository';
 import {
   ListWordQuery,
   WordFindByContextInput,
   WordResponse,
 } from '../word.dto';
+import { PaginationList } from 'src/app.dto';
 
 @Injectable()
 export class WordReadService {
-  constructor(private wordRepo: WordRepository) {}
+  constructor(@Inject('WordRepository') private wordRepo: WordRepository) {}
 
   async getWordByContext(input: WordFindByContextInput): Promise<WordResponse> {
     const word = await this.wordRepo.findByContext(input.context);
@@ -25,14 +25,14 @@ export class WordReadService {
   }
 
   async getWordList(
-    input: ListWordQuery,
+    input?: ListWordQuery,
   ): Promise<PaginationList<WordResponse>> {
     const data = await this.wordRepo.findAll(input);
     const total = await this.wordRepo.count();
 
     return {
-      limit: input.limit,
-      offset: input.offset,
+      limit: input?.limit || 0,
+      offset: input?.offset || 0,
       total,
       data,
     };

@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Word } from '../domain/entity';
 import { type WordRepository } from '../domain/repository';
 import { WordCreateInput, WordResponse } from '../word.dto';
 
 @Injectable()
 export class WordCreateService {
-  constructor(private wordRepo: WordRepository) {}
+  constructor(@Inject('WordRepository') private wordRepo: WordRepository) {}
 
   async create(input: WordCreateInput): Promise<WordResponse> {
     //Business Rule

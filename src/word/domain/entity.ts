@@ -1,5 +1,5 @@
 export type WordType = 'noun' | 'verb' | 'adjective';
-import { v4 as uuidv4 } from 'uuid';
+import { uuid } from 'uuidv4';
 
 export class Word {
   private constructor(
@@ -30,7 +30,7 @@ export class Word {
     if (!description.trim() || description.length < 1)
       throw new Error('Description cannot be empty');
 
-    const id = uuidv4();
+    const id = uuid();
 
     return new Word(id, context, type, description);
   }

@@ -1,4 +1,3 @@
-import { UUIDTypes } from 'uuid';
 import { z } from 'zod';
 
 export const wordFindByContextSchema = z.object({
@@ -18,7 +17,7 @@ export type WordCreateInput = z.infer<typeof wordCreateSchema>;
 export type WordFindByContextInput = z.infer<typeof wordFindByContextSchema>;
 
 export type WordResponse = {
-  id: UUIDTypes;
+  id: string;
   context: string;
   type: WordType;
   description: string;
