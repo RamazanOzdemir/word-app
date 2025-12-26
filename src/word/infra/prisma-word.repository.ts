@@ -21,6 +21,13 @@ export class PrismaWordRepository implements WordRepository {
 
     return word ? Word.fromPersistence(word) : null;
   }
+  async findById(id: string): Promise<Word | null> {
+    const word = await prisma.word.findUnique({
+      where: { id },
+    });
+
+    return word ? Word.fromPersistence(word) : null;
+  }
   async findAll(query?: ListWordQuery): Promise<WordResponse[]> {
     const wordList = await prisma.word.findMany({
       skip: query?.offset,
@@ -33,6 +40,17 @@ export class PrismaWordRepository implements WordRepository {
       },
     });
     return wordList;
+  }
+
+  async update(word: Word): Promise<void> {
+    await prisma.word.update({
+      where: { id: word.getId() },
+      data: {
+        context: word.getContext(),
+        type: word.getType(),
+        description: word.getDescription(),
+      },
+    });
   }
 
   async count(query?: ListWordQuery): Promise<number> {

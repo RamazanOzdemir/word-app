@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { z } from 'zod';
 
 export type WordType = 'noun' | 'verb' | 'adjective';
@@ -15,7 +15,15 @@ export const wordCreateSchema = z.object({
   description: z.string().min(3),
 });
 
+export const wordUpdateSchema = z.object({
+  context: z.string().optional(),
+  type: z.enum(wordTypes).optional(),
+  description: z.string().min(3).optional(),
+});
+
 export type WordCreateInput = z.infer<typeof wordCreateSchema>;
+
+export type WordUpdateInput = z.infer<typeof wordUpdateSchema>;
 
 export class WordCrateDto implements WordCreateInput {
   @ApiProperty()
@@ -25,6 +33,8 @@ export class WordCrateDto implements WordCreateInput {
   @ApiProperty()
   description: string;
 }
+
+export class WordUpdateDto extends PartialType(WordCrateDto) {}
 
 export type WordFindByContextInput = z.infer<typeof wordFindByContextSchema>;
 

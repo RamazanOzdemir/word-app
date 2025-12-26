@@ -3,6 +3,7 @@ import { PrismaWordRepository } from './infra/prisma-word.repository';
 import { WordCreateService } from './services/word-create.service';
 import { WordReadService } from './services/word-read.service';
 import { WordsController } from './word.controller';
+import { WordUpdateService } from './services/word-update.service';
 @Module({
   providers: [
     {
@@ -16,6 +17,10 @@ import { WordsController } from './word.controller';
     {
       provide: WordReadService,
       useClass: WordReadService,
+    },
+    {
+      provide: WordUpdateService,
+      useClass: WordUpdateService,
     },
   ],
   controllers: [WordsController],
