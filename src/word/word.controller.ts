@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Post,
@@ -18,6 +19,7 @@ import {
 } from './word.dto';
 import { ZodValidationPipe } from 'src/pipes/zod.validation.pipe';
 import { WordUpdateService } from './services/word-update.service';
+import { WordDeleteService } from './services/word-delete.service';
 
 @Controller('words')
 export class WordsController {
@@ -25,6 +27,7 @@ export class WordsController {
     private createService: WordCreateService,
     private readService: WordReadService,
     private updateService: WordUpdateService,
+    private deleteService: WordDeleteService,
   ) {}
   @Get()
   async findAll() {
@@ -44,5 +47,10 @@ export class WordsController {
     @Body(new ZodValidationPipe(wordUpdateSchema)) body: WordUpdateDto,
   ) {
     return await this.updateService.updateWord(id, body);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id') id: string) {
+    return await this.deleteService.deleteWord(id);
   }
 }

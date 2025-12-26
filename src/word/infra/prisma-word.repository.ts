@@ -53,6 +53,12 @@ export class PrismaWordRepository implements WordRepository {
     });
   }
 
+  async delete(wordId: string): Promise<void> {
+    await prisma.word.delete({
+      where: { id: wordId },
+    });
+  }
+
   async count(query?: ListWordQuery): Promise<number> {
     return await prisma.word.count({
       skip: query?.offset,

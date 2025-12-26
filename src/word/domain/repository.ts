@@ -7,5 +7,6 @@ export interface WordRepository {
   findById(id: string): Promise<Word | null>;
   findAll(query?: ListWordQuery): Promise<WordResponse[]>;
   update(word: Word): Promise<void>;
+  delete(wordId: string): Promise<void>;
   count(query?: ListWordQuery): Promise<number>;
 }

@@ -4,6 +4,7 @@ import { WordCreateService } from './services/word-create.service';
 import { WordReadService } from './services/word-read.service';
 import { WordsController } from './word.controller';
 import { WordUpdateService } from './services/word-update.service';
+import { WordDeleteService } from './services/word-delete.service';
 @Module({
   providers: [
     {
@@ -21,6 +22,10 @@ import { WordUpdateService } from './services/word-update.service';
     {
       provide: WordUpdateService,
       useClass: WordUpdateService,
+    },
+    {
+      provide: WordDeleteService,
+      useClass: WordDeleteService,
     },
   ],
   controllers: [WordsController],
