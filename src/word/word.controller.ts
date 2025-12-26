@@ -8,18 +8,17 @@ import {
   Put,
   UsePipes,
 } from '@nestjs/common';
+import { ZodValidationPipe } from 'src/pipes/zod.validation.pipe';
 import { WordCreateService } from './services/word-create.service';
+import { WordDeleteService } from './services/word-delete.service';
 import { WordReadService } from './services/word-read.service';
+import { WordUpdateService } from './services/word-update.service';
 import {
   WordCrateDto,
-  type WordCreateInput,
   wordCreateSchema,
   WordUpdateDto,
   wordUpdateSchema,
 } from './word.dto';
-import { ZodValidationPipe } from 'src/pipes/zod.validation.pipe';
-import { WordUpdateService } from './services/word-update.service';
-import { WordDeleteService } from './services/word-delete.service';
 
 @Controller('words')
 export class WordsController {
@@ -37,7 +36,7 @@ export class WordsController {
   @UsePipes(new ZodValidationPipe(wordCreateSchema))
   @Post()
   async create(@Body() body: WordCrateDto) {
-    return await this.createService.create(body as WordCreateInput);
+    return await this.createService.create(body);
   }
 
   // @UsePipes(new ZodValidationPipe(wordUpdateSchema))
