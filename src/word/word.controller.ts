@@ -8,7 +8,7 @@ import {
   Put,
   UsePipes,
 } from '@nestjs/common';
-import { ZodValidationPipe } from 'src/pipes/zod.validation.pipe';
+import { ZodValidationPipe } from 'src/common/pipes/zod.validation.pipe';
 import { WordCreateService } from './services/word-create.service';
 import { WordDeleteService } from './services/word-delete.service';
 import { WordReadService } from './services/word-read.service';
