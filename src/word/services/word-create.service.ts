@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Word } from '../domain/entity';
 import { type WordRepository } from '../domain/repository';
 import { WordCreateInput, WordResponse } from '../word.dto';
+import { DuplicateEntityException } from 'src/common/exceptions/domain.exceptions';
 
 @Injectable()
 export class WordCreateService {
@@ -11,7 +12,8 @@ export class WordCreateService {
     //Business Rule
     const wordExist = await this.wordRepo.findByContext(input.context);
 
-    if (wordExist) throw new Error('The Word allready exists');
+    if (wordExist)
+      throw new DuplicateEntityException('Word', 'context', input.context);
 
     const word = Word.create(input.context, input.type, input.description);
 

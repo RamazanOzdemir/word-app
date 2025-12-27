@@ -1,4 +1,5 @@
 export type WordType = 'noun' | 'verb' | 'adjective';
+import { DomainException } from 'src/common/exceptions/domain.exceptions';
 import { uuid } from 'uuidv4';
 
 export class Word {
@@ -25,10 +26,10 @@ export class Word {
   static create(context: string, type: WordType, description: string) {
     // Optional: business rule
     if (!context.trim() || context.length < 1)
-      throw new Error('Context cannot be empty');
+      throw new DomainException('Context cannot be empty');
 
     if (!description.trim() || description.length < 1)
-      throw new Error('Description cannot be empty');
+      throw new DomainException('Description cannot be empty');
 
     const id = uuid();
 
@@ -36,17 +37,19 @@ export class Word {
   }
 
   updateContext(newContext: string) {
-    if (!newContext.trim()) throw new Error('Context cannot be empty');
+    if (!newContext.trim())
+      throw new DomainException('Context cannot be empty');
     this.context = newContext;
   }
 
   updateDescription(newDescription: string) {
-    if (!newDescription.trim()) throw new Error('Description cannot be empty');
+    if (!newDescription.trim())
+      throw new DomainException('Description cannot be empty');
     this.description = newDescription;
   }
 
   updateType(newType: WordType) {
-    if (!newType) throw new Error('Word Type cannot be empty');
+    if (!newType) throw new DomainException('Word Type cannot be empty');
     this.type = newType;
   }
 

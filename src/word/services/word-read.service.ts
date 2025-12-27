@@ -6,6 +6,7 @@ import {
   WordResponse,
 } from '../word.dto';
 import { PaginationList } from 'src/app.dto';
+import { NotFoundException } from 'src/common/exceptions/domain.exceptions';
 
 @Injectable()
 export class WordReadService {
@@ -14,7 +15,7 @@ export class WordReadService {
   async getWordByContext(input: WordFindByContextInput): Promise<WordResponse> {
     const word = await this.wordRepo.findByContext(input.context);
 
-    if (!word) throw new Error("Word doesn't exist");
+    if (!word) throw new NotFoundException('Word', 'context', input.context);
 
     return {
       id: word.getId(),

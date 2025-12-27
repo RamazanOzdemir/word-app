@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { type WordRepository } from '../domain/repository';
 import { WordResponse, WordUpdateDto } from '../word.dto';
+import { NotFoundException } from 'src/common/exceptions/domain.exceptions';
 
 @Injectable()
 export class WordUpdateService {
@@ -12,7 +13,7 @@ export class WordUpdateService {
   ): Promise<WordResponse> {
     const word = await this.wordRepo.findById(wordId);
 
-    if (!word) throw new Error("Word doesn't exist");
+    if (!word) throw new NotFoundException('Word', 'ID', wordId);
 
     if (input.context) word.updateContext(input.context);
     if (input.type) word.updateType(input.type);
