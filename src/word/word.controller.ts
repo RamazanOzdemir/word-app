@@ -14,7 +14,7 @@ import { WordDeleteService } from './services/word-delete.service';
 import { WordReadService } from './services/word-read.service';
 import { WordUpdateService } from './services/word-update.service';
 import {
-  WordCrateDto,
+  WordCreateDto,
   wordCreateSchema,
   WordUpdateDto,
   wordUpdateSchema,
@@ -35,7 +35,7 @@ export class WordsController {
 
   @UsePipes(new ZodValidationPipe(wordCreateSchema))
   @Post()
-  async create(@Body() body: WordCrateDto) {
+  async create(@Body() body: WordCreateDto) {
     return await this.createService.create(body);
   }
 

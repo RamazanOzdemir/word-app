@@ -25,7 +25,7 @@ export type WordCreateInput = z.infer<typeof wordCreateSchema>;
 
 export type WordUpdateInput = z.infer<typeof wordUpdateSchema>;
 
-export class WordCrateDto implements WordCreateInput {
+export class WordCreateDto implements WordCreateInput {
   @ApiProperty()
   context: string;
   @ApiProperty({ enum: wordTypes })
@@ -34,7 +34,7 @@ export class WordCrateDto implements WordCreateInput {
   description: string;
 }
 
-export class WordUpdateDto extends PartialType(WordCrateDto) {}
+export class WordUpdateDto extends PartialType(WordCreateDto) {}
 
 export type WordFindByContextInput = z.infer<typeof wordFindByContextSchema>;
 
