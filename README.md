@@ -1,8 +1,10 @@
 # NestJS Hexagonal API
 
-A backend API built with **NestJS** following **Hexagonal Architecture (Ports & Adapters)** principles.
+This project was built to practice designing backend applications with clear boundaries between domain logic and infrastructure.
 
-This project focuses on **clear separation of concerns**, **domain isolation**, and **testable application design**.
+The focus is not **feature richness**, but **architectural clarity**, **testability**, and **explicit design decisions**.
+
+A backend API built with **NestJS** following **Hexagonal Architecture (Ports & Adapters)** principles.
 
 ---
 
@@ -16,6 +18,24 @@ the core business logic independent from frameworks, databases, and external ser
 - Clear and explicit business rules
 - Infrastructure-agnostic domain layer
 - Maintainable and extensible codebase
+
+---
+
+## What this project is NOT
+
+- This is not a full production system
+- No authentication / authorization
+- No complex business workflows
+- Single bounded context by design
+
+---
+
+## If this were production
+
+- Pagination & filtering abstraction for read models
+- Separate read/write models (CQRS-lite)
+- Observability (logging, tracing)
+- Auth boundary as a separate module
 
 ---
 
